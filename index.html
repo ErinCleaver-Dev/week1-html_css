@@ -42,7 +42,7 @@
             width: 400px;
         }
         
-        #tempture  {
+        .temperature  {
             color:rgb(26, 100, 214);
             font-weight: bold;
         }
@@ -83,10 +83,10 @@
 
 <body>
     <div class="container">
-       <h1 class="title" id="tempture"> 
-            🌤
+       <h1 class="title temperature"> 
+            <span id="icon">🌤</span>
             <br>
-            Currently 21° in Tokyo  
+            Currently <span id="temperature">21°</span> in <span id="city">Tokyo</span>
        </h1>
        <h1 class="title p1" id="padding-bottom">
             13° / <strong>23°</strong>
@@ -106,5 +106,45 @@
         <button id="button" type="submit">Change City</button>
         <p id="gray">Coded By Erin Cleaver</p>
     </div>
+    <script>
+        let changeCity = document.querySelector("#button");
+
+
+        const updateTemperature =(temperature) => {
+            if(!isNaN(temperature)) {
+                if(temperature >= 0)  {
+                    temptureString(temperature, "😄")
+                } else {
+                    temptureString(temperature, "☹️")
+                }
+            }
+        }
+
+        const temptureString = (temperature, icon) => {
+            newTemperature = document.querySelector('#temperature')
+            newIcon = document.querySelector('#icon')
+            newTemperature.innerHTML = `${temperature}°C`
+            newIcon.innerHTML = icon;
+        }
+
+        const updateCity = (city) => {
+            newCity = document.querySelector("#city");
+
+            newCity.innerHTML = city;
+
+        }
+
+        const updateCurrentWeather = () => {
+            city = prompt("What city do you live in?");
+            temperature = prompt("what temperature is it?");
+            
+            updateTemperature(temperature);
+            updateCity(city);
+        }
+
+        changeCity.addEventListener("click", updateCurrentWeather);
+
+
+    </script>
 </body>
 </html>
